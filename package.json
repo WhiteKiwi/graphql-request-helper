@@ -14,8 +14,12 @@
     "type": "git",
     "url": "git+https://github.com/whitekiwi/graphql-request-helper.git"
   },
-  "author": "whitekiwi",
-  "license": "ISC",
+  "author": {
+    "name": "whitekiwi",
+    "email": "jh145478@gmail.com",
+    "url": "https://medium.com/@whitekiwi"
+  },
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^14.14.20",
     "@typescript-eslint/eslint-plugin": "^4.8.1",
@@ -25,5 +29,20 @@
   },
   "dependencies": {
     "axios": "^0.21.1"
+  },
+  "keywords": [
+    "graphql",
+    "graphql-request-helper",
+    "graphql-client",
+    "graphql client",
+    "client",
+    "graphql helper",
+    "graphql-helper",
+    "helper"
+  ],
+  "homepage": "https://github.com/whitekiwi/graphql-request-helper",
+  "bugs": {
+    "url": "https://github.com/whitekiwi/graphql-request-helper/issues",
+    "email": "jh145478@gmail.com"
   }
 }
