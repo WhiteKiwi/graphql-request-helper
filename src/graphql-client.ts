@@ -10,10 +10,10 @@ interface GraphQLClientQueryParams {
 	params: any
 	fields: (string | Field)[]
 }
-export default class GraphQLClient {
+export class GraphQLClient {
 	private graphQLUrl: string
 
-	constructor(graphQLUrl) {
+	constructor(graphQLUrl: string) {
 		this.graphQLUrl = graphQLUrl
 	}
 
