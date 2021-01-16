@@ -2,10 +2,11 @@
   "name": "graphql-request-helper",
   "version": "0.1.2",
   "description": "",
-  "main": "src/index.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "start": "npm run build && node dist/index.js",
+    "start": "npm run build && node lib/index.js",
     "test": "jest --config ./test/jest-e2e.json --forceExit",
     "lint": "eslint --ext .js,.ts ./src",
     "lint:fix": "eslint --fix --ext .js,.ts ./src"
@@ -46,6 +47,6 @@
     "email": "jh145478@gmail.com"
   },
   "files": [
-    "dist"
+    "lib"
   ]
 }

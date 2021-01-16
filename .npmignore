@@ -1,8 +1,8 @@
 # node files
 node_modules
 
-# compiled files
-/lib
+# source files
+/src
 
 # IDE files
 .vscode
