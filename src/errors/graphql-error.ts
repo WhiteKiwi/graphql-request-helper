@@ -11,6 +11,7 @@ export class GraphQLError extends Error {
 
 	constructor(graphQLErrors: GraphQLErrorResponse[]){
 		super(graphQLErrors.map((error) => error.message).join('\n'))
+		this.name = 'GraphQLError'
 		this.errors = graphQLErrors
 
 		if (Error.captureStackTrace) {
