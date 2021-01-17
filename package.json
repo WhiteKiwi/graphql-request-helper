@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "start": "npm run build && node lib/index.js",
-    "publish": "npm run build && npm publish",
+    "publish:npm": "npm run build && npm publish",
     "lint": "eslint --ext .js,.ts ./src",
     "lint:fix": "eslint --fix --ext .js,.ts ./src"
   },
