@@ -7,8 +7,8 @@ import {
 
 interface GraphQLQueryParams {
 	name: string
-	params: any
-	fields: (string | Field)[]
+	params?: any
+	fields?: (string | Field)[]
 }
 export class GraphQLClient {
 	private graphQLUrl: string
