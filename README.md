@@ -10,7 +10,7 @@ Installing
 $ npm install graphql-request-helper
 ```
 
-## Example
+## Usage
 
 ```js
 import { GraphQLClient } from "graphql-request-helper";
@@ -134,4 +134,50 @@ then e.errors will be like this
     ]
   }
 ]
+```
+
+### use axios options
+
+```js
+const graphQLClient = new GraphQLClient("http://localhost:3000/api/graphql", {
+  axios: {
+    headers: {
+      Authorization: "Bearer ...",
+    },
+  },
+});
+```
+
+The axios option is used as the third parameter in the axios request
+
+```js
+constructor(url, options) {
+  this.axiosOptions = options?.axios
+}
+// ...
+const response = await axios.post(
+  this.graphQLUrl,
+  {
+    query,
+  },
+  this.axiosOptions
+);
+```
+
+You can also modify it as a setAxiosOptions function.
+
+```js
+const graphQLClient = new GraphQLClient("http://localhost:3000/api/graphql", {
+  axios: {
+    headers: {
+      Authorization: "Bearer A",
+    },
+  },
+});
+
+graphQLClient.setAxiosOptions({
+  headers: {
+    Authorization: "Bearer B",
+  },
+});
 ```
