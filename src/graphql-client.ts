@@ -43,6 +43,10 @@ export class GraphQLClient {
 		return data[name]
 	}
 
+	async setAxiosOptions(options) {
+		this.axiosOptions = options
+	}
+
 	private async request(query: string) {
 		const response = await axios.post(this.graphQLUrl, {
 			query,
