@@ -26,16 +26,18 @@ Performing a `Query` request
 
 ```js
 const data = await graphQLClient.query({
-  queryName: "getItems",
+  queryName: "getAnimals",
   fields: [
     "id",
+    "name",
+    "age",
     {
-      name: "shop",
+      name: "family",
       fields: ["id", "name"],
     },
   ],
   params: {
-    page: 1,
+    age: 3,
   },
 });
 ```
@@ -44,9 +46,10 @@ GraphQLClient receives the above fields and params and sends the following reque
 
 ```js
 query{
-    getItems(page: 1){
+    getAnimals(age: 3){
         id
-        shop {
+        name
+        family{
             id
             name
         }
