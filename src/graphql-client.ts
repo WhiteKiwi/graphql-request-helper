@@ -43,7 +43,11 @@ export class GraphQLClient {
 		return data[name]
 	}
 
-	async setAxiosOptions(options) {
+	async setGraphQLUrl(url: string) {
+		this.graphQLUrl = url
+	}
+
+	async setAxiosOptions(options: any) {
 		this.axiosOptions = options
 	}
 
