@@ -4,6 +4,9 @@ node_modules
 # source files
 /src
 
+# test file
+/src/test.ts
+
 # IDE files
 .vscode
 
