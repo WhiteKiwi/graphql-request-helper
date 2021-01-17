@@ -22,7 +22,9 @@ Create Graphql Client
 const graphQLClient = new GraphQLClient("http://localhost:3000/api/graphql");
 ```
 
-Performing a `Query` request
+<br>
+
+### Performing a `Query` request
 
 ```js
 const data = await graphQLClient.query({
@@ -58,7 +60,9 @@ query{
 }
 ```
 
-Performing a `Mutation` request
+<br>
+
+### Performing a `Mutation` request
 
 ```js
 const data = await graphQLClient.mutation({
@@ -96,7 +100,9 @@ mutation{
 }
 ```
 
-Catch an Error
+<br>
+
+### Catch an Error
 
 ```js
 import { GraphQLError } from "graphql-request-helper";
