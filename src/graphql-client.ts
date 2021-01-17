@@ -1,4 +1,5 @@
 import axios from 'axios'
+axios.defaults.validateStatus = (status) => status < 500
 import { GraphQLError } from './errors'
 import { Field } from './models'
 import {
@@ -11,11 +12,17 @@ interface GraphQLQueryParams {
 	params?: any
 	fields?: (string | Field)[]
 }
+interface GraphQLOptions {
+	axios?: any
+}
 export class GraphQLClient {
 	private graphQLUrl: string
+	private axiosOptions: any
 
-	constructor(graphQLUrl: string) {
+	constructor(graphQLUrl: string, options?: GraphQLOptions) {
+		if (!graphQLUrl.startsWith('http')) graphQLUrl = 'https://' + graphQLUrl
 		this.graphQLUrl = graphQLUrl
+		this.axiosOptions = options?.axios
 	}
 
 	async query({ name, params = {}, fields = [] }: GraphQLQueryParams) {
@@ -39,11 +46,7 @@ export class GraphQLClient {
 	private async request(query: string) {
 		const response = await axios.post(this.graphQLUrl, {
 			query,
-		}, {
-			validateStatus: function (status) {
-				return status < 500
-			},
-		})
+		}, this.axiosOptions)
 
 		if (response.data?.errors) {
 			throw new GraphQLError(response.data.errors)
