@@ -26,7 +26,7 @@ Performing a `Query` request
 
 ```js
 const data = await graphQLClient.query({
-  queryName: "getAnimals",
+  name: "getAnimals",
   fields: [
     "id",
     "name",
@@ -49,6 +49,7 @@ query{
     getAnimals(age: 3){
         id
         name
+        age
         family{
             id
             name
@@ -60,7 +61,39 @@ query{
 Performing a `Mutation` request
 
 ```js
-// In ready.
+const data = await graphQLClient.mutation({
+  name: "addAnimal",
+  fields: [
+    "id",
+    "name",
+    "age",
+    {
+      name: "family",
+      fields: ["id", "name"],
+    },
+  ],
+  params: {
+    name: "puppy",
+    age: 1,
+    isCute: true,
+  },
+});
+```
+
+GraphQLClient receives the above fields and params and sends the following request
+
+```js
+mutation{
+    addAnimal(name: "puppy", age: 1, isCute: true){
+        id
+        name
+        age
+        family{
+            id
+            name
+        }
+    }
+}
 ```
 
 Catch an Error

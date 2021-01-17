@@ -5,8 +5,8 @@ import {
 	fieldsToGraphQL,
 } from './utils'
 
-interface GraphQLClientQueryParams {
-	queryName: string
+interface GraphQLQueryParams {
+	name: string
 	params: any
 	fields: (string | Field)[]
 }
@@ -17,13 +17,22 @@ export class GraphQLClient {
 		this.graphQLUrl = graphQLUrl
 	}
 
-	async query({ queryName, params = {}, fields = [] }: GraphQLClientQueryParams) {
-		const query = `{
-			${queryName}${paramsToGraphQL(params)} ${fieldsToGraphQL(fields)}
+	async query({ name, params = {}, fields = [] }: GraphQLQueryParams) {
+		const query = `query{
+			${name}${paramsToGraphQL(params)} ${fieldsToGraphQL(fields)}
 		}`
 
 		const response = await this.request(query)
-		return response.data.data[queryName]
+		return response.data.data[name]
+	}
+
+	async mutation({ name, params = {}, fields = [] }: GraphQLQueryParams) {
+		const mutation = `mutation{
+			${name}${paramsToGraphQL(params)} ${fieldsToGraphQL(fields)}
+		}`
+
+		const response = await this.request(mutation)
+		return response.data.data[name]
 	}
 
 	private async request(query: string) {
