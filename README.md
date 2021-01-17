@@ -99,5 +99,33 @@ mutation{
 Catch an Error
 
 ```js
-// In ready.
+import { GraphQLError } from "graphql-request-helper";
+```
+
+```js
+try {
+  const data = await graphQLClient.query({
+    // ...
+  });
+} catch (e) {
+  if (e instanceof GraphQLError) {
+    console.log(e.errors);
+  }
+}
+```
+
+then e.errors will be like this
+
+```json
+[
+  {
+    "message": "Schema is not configured for mutations.",
+    "locations": [
+      {
+        "line": 1,
+        "column": 1
+      }
+    ]
+  }
+]
 ```
