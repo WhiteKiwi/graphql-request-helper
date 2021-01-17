@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { GraphQLError } from './errors'
 import { Field } from './models'
 import {
 	paramsToGraphQL,
@@ -22,8 +23,8 @@ export class GraphQLClient {
 			${name}${paramsToGraphQL(params)} ${fieldsToGraphQL(fields)}
 		}`
 
-		const response = await this.request(query)
-		return response.data.data[name]
+		const data = await this.request(query)
+		return data[name]
 	}
 
 	async mutation({ name, params = {}, fields = [] }: GraphQLQueryParams) {
@@ -31,13 +32,23 @@ export class GraphQLClient {
 			${name}${paramsToGraphQL(params)} ${fieldsToGraphQL(fields)}
 		}`
 
-		const response = await this.request(mutation)
-		return response.data.data[name]
+		const data = await this.request(mutation)
+		return data[name]
 	}
 
 	private async request(query: string) {
-		return await axios.post(this.graphQLUrl, {
+		const response = await axios.post(this.graphQLUrl, {
 			query,
+		}, {
+			validateStatus: function (status) {
+				return status < 500
+			},
 		})
+
+		if (response.data?.errors) {
+			throw new GraphQLError(response.data.errors)
+		}
+
+		return response.data?.data
 	}
 }
