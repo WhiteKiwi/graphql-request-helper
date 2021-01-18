@@ -3,8 +3,12 @@ export function paramsToGraphQL(params): string {
 	for (const key of Object.keys(params)) {
 		let value = params[key]
 		if (Array.isArray(params[key])) {
-			value=`[${params[key]}]`
-		} else if (typeof (params[key])=== 'string') {
+			if (typeof params[key][0] === 'string') {
+				value=`["${params[key].join('", "')}"]`
+			} else {
+				value=`[${params[key]}]`
+			}
+		} else if (typeof params[key] === 'string') {
 			value=`"${params[key]}"`
 		}
 		paramString.push(`${key}: ${value}`)
